@@ -7,7 +7,7 @@ export default function HomeScreen({navigation}) {
 
     return (
         <View style={styles.container}>
-                <Text>Recherche</Text>
+                <Text style={styles.title}>Rechercher un morceau</Text>
 
                 {/* Barre de recherche */}
                 <View style={styles.rowInput}>
@@ -27,7 +27,8 @@ export default function HomeScreen({navigation}) {
                 </View>
 
 
-                {/* Accès à la playlist */}
+                <Text style={styles.title}>Accès rapide</Text>
+                 {/* Accès à la playlist */}
                 <Button title="Ma playlist" onPress={() => navigation.navigate('Playlist')}></Button>
         </View>
     )
@@ -37,15 +38,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 20,
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 20,
+        marginTop: 20,
+        textAlign: 'left',
     },
     rowInput: {
-        width: '90%',
-        marginTop: 20,
-        marginBottom: 20,
         flexDirection: 'row',
         alignItems: 'center',
+        marginBottom: 70,
     },
     input: {
         flex: 1,
