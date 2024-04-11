@@ -19,8 +19,13 @@ export default function HomeScreen({navigation}) {
                         keyboardType="default"
                         onSubmitEditing={() => navigation.navigate('SearchResult', {search})}
                     />
-                    <Button title="Rechercher" onPress={() => navigation.navigate('SearchResult', {search})}></Button>
+
+                    <Button 
+                        title="Rechercher" 
+                        onPress={() => navigation.navigate('SearchResult', {search})} 
+                        disabled={search.length < 3}></Button>
                 </View>
+
 
                 {/* Accès à la playlist */}
                 <Button title="Ma playlist" onPress={() => navigation.navigate('Playlist')}></Button>
