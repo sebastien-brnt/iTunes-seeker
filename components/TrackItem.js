@@ -1,6 +1,10 @@
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function TrackItem(props) {
+    const navigation = useNavigation();
+
     // Récupération des informations du morceau
     const track = props.track;
 

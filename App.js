@@ -6,13 +6,14 @@ import { StyleSheet, Text } from 'react-native';
 import HomeScreen from './components/HomeScreen';
 import PlaylistScreen from './components/PlaylistScreen';
 import SearchResultScreen from './components/SearchResultScreen';
+import TrackDetailsScreen from './components/TrackDetailsScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator(); // Permet de définir la pile de navigation
 
   return (
     // Logique de navigation de l'application :
-    //    - 3 écrans : HomeScreen, PlaylistScreen, SearchResultScreen
+    //    - 4 écrans : HomeScreen, PlaylistScreen, SearchResultScreen, TrackDetailsScreen
     //    - Ecran de démarrage : HomeScreen
 
     <NavigationContainer>
@@ -31,6 +32,11 @@ export default function App() {
           name="SearchResult" 
           component={SearchResultScreen}
           options={{ headerTitle: props => <Text style={styles.title}>Résultat de recherche</Text> }}></Stack.Screen>
+        
+        <Stack.Screen 
+          name="TrackDetails" 
+          component={TrackDetailsScreen}
+          options={{ headerTitle: props => <Text style={styles.title}>Morceau</Text> }}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
