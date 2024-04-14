@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -10,13 +10,15 @@ export default function TrackItem(props) {
 
     return (
         // Affichages des informations dans l'item
-        <View style={styles.container}>
-            <Image source={{ uri: track.artworkUrl100 }} style={styles.image} />
-            <View style={styles.detailsContainer}>
-                <Text style={styles.trackName}>{track.trackName}</Text>
-                <Text>{track.artistName}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('TrackDetails', { track: track })}>
+            <View style={styles.container}>
+                <Image source={{ uri: track.artworkUrl100 }} style={styles.image} />
+                <View style={styles.detailsContainer}>
+                    <Text style={styles.trackName}>{track.trackName}</Text>
+                    <Text>{track.artistName}</Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
