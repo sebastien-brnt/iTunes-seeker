@@ -1,6 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native';
+
 
 // Import des pages
 import HomeScreen from './components/HomeScreen';
@@ -21,7 +24,20 @@ export default function App() {
         <Stack.Screen 
           name="Home" 
           component={HomeScreen}
-          options={{ headerTitle: props => <Text style={styles.title}>Accueil</Text> }}></Stack.Screen>
+          options={() => {
+            const navigation = useNavigation();
+            return {
+              headerTitle: props => <Text style={styles.title}>Accueil</Text>,
+              headerRight: () => (
+                <Icon 
+                  name="music" 
+                  size={25} 
+                  color="#000"  
+                  onPress={() => navigation.navigate('Playlist')}
+                />
+              )
+            };
+          }}></Stack.Screen>
 
         <Stack.Screen 
           name="Playlist" 
