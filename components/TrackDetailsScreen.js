@@ -1,12 +1,19 @@
-import { Text, View, StyleSheet } from "react-native"
+import { Text, View, Image, StyleSheet } from "react-native"
 
-export default function TrackDetailsScreen(props) {
-    // Récupération des information du morceau
-    const track = props.track;
+export default function TrackDetailsScreen({ route }) {
+    // Récupération des informations du morceau
+    const { track } = route.params;
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{track.trackName}</Text>
+            {track ? (
+                <View>
+                    <Image source={{ uri: track.artworkUrl100 }} />
+                    <Text style={styles.title}>{track.trackName}</Text>
+                </View>
+            ) : (
+                <Text style={styles.title}>Aucune information sur le morceau disponible.</Text>
+            )}
         </View>
     )
 }
