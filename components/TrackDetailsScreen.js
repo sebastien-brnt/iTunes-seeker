@@ -10,7 +10,6 @@ export default function TrackDetailsScreen({ route }) {
 
     // Vériication de l'existence du morceau dans la playlist
     const isTrackPresent = useSelector(state => trackExists(state, track.trackId));
-    console.log(isTrackPresent);
 
     // Fonction pour formater le temps en minutes et secondes
     function formatTime(milliseconds) {

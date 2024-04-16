@@ -11,8 +11,11 @@ const tracksSlice = createSlice({
         },
 
         // Reducer pour enlever un morceau de la playlist
-        removeTrack: (state, action) =>{
-            state.splice(action.payload, 1);
+        removeTrack: (state, action) => {
+            const index = state.findIndex(track => track.trackId === action.payload);
+            if (index !== -1) {
+                state.splice(index, 1);
+            }
         }
     }
 });

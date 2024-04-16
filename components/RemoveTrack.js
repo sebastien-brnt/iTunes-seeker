@@ -11,7 +11,7 @@ export default function RemoveTrack({ track }) {
 
     // On effectue l'action de retirer un morceau de la playlist
     const removePlaylistTrack = () => {
-        dispatch(removeTrack(track))
+        dispatch(removeTrack(track.trackId))
     }
 
 
