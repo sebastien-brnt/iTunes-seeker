@@ -1,15 +1,48 @@
-import { Text, View, Image, StyleSheet } from "react-native"
+import { Text, View, Image, Button, StyleSheet } from "react-native"
 
 export default function TrackDetailsScreen({ route }) {
     // Récupération des informations du morceau
     const { track } = route.params;
 
+    // Fonction pour formater le temps en minutes et secondes
+    function formatTime(milliseconds) {
+        const totalSeconds = Math.floor(milliseconds / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        return `${minutes}min ${seconds < 10 ? '0' : ''}${seconds}s`;
+    }
+
     return (
         <View style={styles.container}>
             {track ? (
                 <View>
-                    <Image source={{ uri: track.artworkUrl100 }} />
-                    <Text style={styles.title}>{track.trackName}</Text>
+                    {/* Header du morceau */}
+                    <View style={styles.header}>
+                        <Image
+                        source={{ uri: track.artworkUrl100 }}
+                        style={styles.image} />
+
+                        <View>
+                            <Text style={styles.trackName}>{track.trackName}</Text>
+                            <Text style={styles.artistName}>{track.artistName}</Text>
+                            <Button 
+                            title="Ajouter à ma playlist" 
+                            onPress={() => alert("Ajouter à ma playlist")}
+                            style={styles.buttons} />
+                        </View>
+                    </View>
+
+                    {/* Information du morceau */}
+                    <Text style={styles.title}>Détails du morceau</Text>
+
+                    <Text style={styles.detail}>Durée : {formatTime(track.trackTimeMillis)}</Text>
+                    <Text style={styles.detail}>Date de sortie : {track.releaseDate}</Text>
+                    <Text style={styles.detail}>Type de musique : {track.primaryGenreName}</Text>
+                    <Text style={styles.detail}>Album : {track.collectionName}</Text>
+
+                    {/* Notation du morceau */}
+                    <Text style={styles.title}>Notation</Text>
+
                 </View>
             ) : (
                 <Text style={styles.title}>Aucune information sur le morceau disponible.</Text>
@@ -17,7 +50,7 @@ export default function TrackDetailsScreen({ route }) {
         </View>
     )
 }
-
+ 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -27,8 +60,29 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 20,
         marginTop: 20,
+        marginBottom: 20,
         textAlign: 'left',
-    }
+        maxWidth: '100%'
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 20
+    },
+    image: {
+        width: 100,
+        height: 100,
+        borderRadius: 10,
+        marginRight: 20,
+    },
+    trackName: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'left',
+        marginBottom: 5
+    },
+    detail: {
+        marginBottom: 5
+    },
 });
