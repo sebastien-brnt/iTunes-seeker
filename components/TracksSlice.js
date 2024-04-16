@@ -20,7 +20,6 @@ const tracksSlice = createSlice({
     }
 });
 
-// Actions déconstruites pour une utilisation facile
 export const { addTrack, removeTrack } = tracksSlice.actions;
 
 // Sélecteur pour obtenir tous les tracks
