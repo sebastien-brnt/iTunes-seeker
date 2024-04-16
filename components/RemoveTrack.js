@@ -1,23 +1,23 @@
 import { View, StyleSheet } from "react-native"
 import { useDispatch } from "react-redux";
-import { addTrack } from "./TracksSlice"; 
+import { removeTrack } from "./TracksSlice"; 
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
-export default function AddTrack({ track }) {
+export default function RemoveTrack({ track }) {
 
     // Dispatcher pour comminiquer les actions au store
     const dispatch = useDispatch();
 
-    // On effectue l'action d'ajouter un nouveau morceau à la playlist
-    const addNewTrack = () => {
-        dispatch(addTrack(track))
+    // On effectue l'action de retirer un morceau de la playlist
+    const removePlaylistTrack = () => {
+        dispatch(removeTrack(track))
     }
 
 
     return (    
         <View style={styles.button}>
-            <Icon name="hearto" size={25} color="#000" onPress={addNewTrack}/>
+            <Icon name="heart" size={25} color="#000" onPress={removePlaylistTrack}/>
         </View>
     )
 }

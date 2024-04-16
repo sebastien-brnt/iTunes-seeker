@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/AntDesign';
 import store from './store/store';
 
 
@@ -33,9 +33,9 @@ export default function App() {
                 headerTitle: props => <Text style={styles.title}>Accueil</Text>,
                 headerRight: () => (
                   <Icon 
-                    name="music" 
-                    size={25} 
-                    color="#000"  
+                    name="heart" 
+                    size={25}
+                    style={styles.icon} 
                     onPress={() => navigation.navigate('Playlist')}
                   />
                 )
@@ -67,5 +67,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  icon: {
+    marginRight: 10,
+    color: '#000',
   }
 });

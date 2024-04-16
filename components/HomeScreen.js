@@ -57,7 +57,6 @@ export default function HomeScreen({navigation}) {
                 {/* Affichage du résultat de la recherche lorsque le chargement est terminé */}
                 {search.length >= 1 && (results.length > 0 ? (
                     <FlatList
-                    style={styles.list}
                     data={results}
                     keyExtractor={(item) => item.trackId ? item.trackId.toString() : item.collectionId.toString()}
                     renderItem={({ item }) => (

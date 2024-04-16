@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from 'reselect';
 
 const tracksSlice = createSlice({
     name: "tracks",
@@ -16,6 +17,16 @@ const tracksSlice = createSlice({
     }
 });
 
+// Actions déconstruites pour une utilisation facile
 export const { addTrack, removeTrack } = tracksSlice.actions;
+
+// Sélecteur pour obtenir tous les tracks
 export const trackSelector = (state) => state.tracks;
+
+// Sélecteur pour vérifier si un track spécifique existe
+export const trackExists = createSelector(
+    [trackSelector, (state, trackId) => trackId],
+    (tracks, trackId) => tracks.some(track => track.trackId === trackId)
+);
+
 export default tracksSlice.reducer;

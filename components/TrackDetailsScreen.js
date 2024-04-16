@@ -1,9 +1,16 @@
 import { Text, View, Image, StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
+import { trackExists } from "./TracksSlice";
 import AddTrack from "./AddTrack";
+import RemoveTrack from "./RemoveTrack";
 
 export default function TrackDetailsScreen({ route }) {
     // Récupération des informations du morceau
     const { track } = route.params;
+
+    // Vériication de l'existence du morceau dans la playlist
+    const isTrackPresent = useSelector(state => trackExists(state, track.trackId));
+    console.log(isTrackPresent);
 
     // Fonction pour formater le temps en minutes et secondes
     function formatTime(milliseconds) {
@@ -26,7 +33,15 @@ export default function TrackDetailsScreen({ route }) {
                         <View>
                             <Text style={styles.trackName}>{track.trackName}</Text>
                             <Text style={styles.artistName}>{track.artistName}</Text>
-                            <AddTrack track={track}/>
+
+                            {/* Boutons pour ajouter / retirer le morceau à la playlist */}
+                            <View style={styles.playlistButton}>
+                                {isTrackPresent ? (
+                                    <RemoveTrack track={track}/>
+                                ) : (
+                                    <AddTrack track={track}/>
+                                )}
+                            </View>
                         </View>
                     </View>
 
@@ -79,6 +94,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'left',
         marginBottom: 5
+    },
+    playlistButton: {
+        marginTop: 10,
     },
     detail: {
         marginBottom: 5
