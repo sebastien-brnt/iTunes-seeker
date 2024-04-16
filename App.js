@@ -1,8 +1,10 @@
+import { StyleSheet, Text } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { StyleSheet, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import store from './store/store';
 
 
 // Import des pages
@@ -19,42 +21,45 @@ export default function App() {
     //    - 4 écrans : HomeScreen, PlaylistScreen, SearchResultScreen, TrackDetailsScreen
     //    - Ecran de démarrage : HomeScreen
 
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen 
-          name="Home" 
-          component={HomeScreen}
-          options={() => {
-            const navigation = useNavigation();
-            return {
-              headerTitle: props => <Text style={styles.title}>Accueil</Text>,
-              headerRight: () => (
-                <Icon 
-                  name="music" 
-                  size={25} 
-                  color="#000"  
-                  onPress={() => navigation.navigate('Playlist')}
-                />
-              )
-            };
-          }}></Stack.Screen>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Home'>
+          <Stack.Screen 
+            name="Home" 
+            component={HomeScreen}
+            options={() => {
+              const navigation = useNavigation();
+              return {
+                headerTitle: props => <Text style={styles.title}>Accueil</Text>,
+                headerRight: () => (
+                  <Icon 
+                    name="music" 
+                    size={25} 
+                    color="#000"  
+                    onPress={() => navigation.navigate('Playlist')}
+                  />
+                )
+              };
+            }}></Stack.Screen>
 
-        <Stack.Screen 
-          name="Playlist" 
-          component={PlaylistScreen}
-          options={{ headerTitle: props => <Text style={styles.title}>Ma playlist</Text> }}></Stack.Screen>
+          <Stack.Screen 
+            name="Playlist" 
+            component={PlaylistScreen}
+            options={{ headerTitle: props => <Text style={styles.title}>Ma playlist</Text> }}></Stack.Screen>
 
-        <Stack.Screen 
-          name="SearchResult" 
-          component={SearchResultScreen}
-          options={{ headerTitle: props => <Text style={styles.title}>Résultat de recherche</Text> }}></Stack.Screen>
-        
-        <Stack.Screen 
-          name="TrackDetails" 
-          component={TrackDetailsScreen}
-          options={{ headerTitle: props => <Text style={styles.title}>Morceau</Text> }}></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+          <Stack.Screen 
+            name="SearchResult" 
+            component={SearchResultScreen}
+            options={{ headerTitle: props => <Text style={styles.title}>Résultat de recherche</Text> }}></Stack.Screen>
+          
+          <Stack.Screen 
+            name="TrackDetails" 
+            component={TrackDetailsScreen}
+            options={{ headerTitle: props => <Text style={styles.title}>Morceau</Text> }}></Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+
   );
 }
 

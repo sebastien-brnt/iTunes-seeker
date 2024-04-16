@@ -1,4 +1,5 @@
-import { Text, View, Image, Button, StyleSheet } from "react-native"
+import { Text, View, Image, StyleSheet } from "react-native";
+import AddTrack from "./AddTrack";
 
 export default function TrackDetailsScreen({ route }) {
     // Récupération des informations du morceau
@@ -25,10 +26,7 @@ export default function TrackDetailsScreen({ route }) {
                         <View>
                             <Text style={styles.trackName}>{track.trackName}</Text>
                             <Text style={styles.artistName}>{track.artistName}</Text>
-                            <Button 
-                            title="Ajouter à ma playlist" 
-                            onPress={() => alert("Ajouter à ma playlist")}
-                            style={styles.buttons} />
+                            <AddTrack track={track}/>
                         </View>
                     </View>
 
