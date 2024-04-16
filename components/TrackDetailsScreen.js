@@ -1,6 +1,7 @@
 import { Text, View, Image, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { trackExists } from "./TracksSlice";
+import AddRating from "./AddRating";
 import AddTrack from "./AddTrack";
 import RemoveTrack from "./RemoveTrack";
 
@@ -54,7 +55,7 @@ export default function TrackDetailsScreen({ route }) {
 
                     {/* Notation du morceau */}
                     <Text style={styles.title}>Notation</Text>
-
+                    <AddRating trackId={track.trackId} />
                 </View>
             ) : (
                 <Text style={styles.title}>Aucune information sur le morceau disponible.</Text>
