@@ -25,10 +25,26 @@ export const { addRating, removeRating } = ratingsSlice.actions;
 // Sélecteur pour obtenir toutes les notations
 export const ratingsSelector = (state) => state.ratings;
 
+// Sélecteur pour obtenir une seule notation en fonction de l'id du track
+export const ratingSelectorById = (state, trackId) => {
+  // Vérifie si les ratings et trackId sont bien structurés et existent
+  if (state.ratings && trackId) {
+    // Parcours les ratings pour trouver celui qui correspond au trackId donné
+    for (const rating of Object.values(state.ratings)) {
+      if (rating.track && rating.track.trackId === trackId) {
+        return rating;
+      }
+    }
+  }
+  // Retourne undefined si aucun rating correspondant n'a été trouvé
+  return undefined;
+};
+
+
 // Sélecteur pour vérifier si un track a déjà été noté
 export const ratingExists = createSelector(
     [ratingsSelector, (state, trackId) => trackId],
-    (ratings, trackId) => ratings.some(track => rating.trackId === trackId)
+    (ratings, trackId) => ratings.some(rating => rating.track.trackId === trackId),
 );
 
 export default ratingsSlice.reducer;

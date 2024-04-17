@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { addRating } from './RatingsSlice';
@@ -10,7 +10,7 @@ export default function AddRating({ track }) {
 
     const handleSubmit = () => {
         const newRating = {
-            trackId: track.trackId,
+            track: track,
             rating: rating
         };
         dispatch(addRating(newRating));
@@ -18,10 +18,10 @@ export default function AddRating({ track }) {
 
     return (
         <View style={styles.container}>
-            <Text>Rating (1-5):</Text>
+            <Text>Notez ce morceau (1-5) :</Text>
             <Picker
                 selectedValue={rating}
-                style={{ height: 50, width: 150 }}
+                style={styles.picker}
                 onValueChange={(itemValue) => setRating(itemValue)}>
                 <Picker.Item label="1" value={1} />
                 <Picker.Item label="2" value={2} />
@@ -30,7 +30,7 @@ export default function AddRating({ track }) {
                 <Picker.Item label="5" value={5} />
             </Picker>
             <Button
-                title="Ajouter la note"
+                title="Valider ma note"
                 onPress={handleSubmit}
             />
         </View>
@@ -39,8 +39,5 @@ export default function AddRating({ track }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
     }
 });

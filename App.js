@@ -10,6 +10,7 @@ import store from './store/store';
 // Import des pages
 import HomeScreen from './components/HomeScreen';
 import PlaylistScreen from './components/PlaylistScreen';
+import RatingsScreen from './components/RatingsScreen';
 import SearchResultScreen from './components/SearchResultScreen';
 import TrackDetailsScreen from './components/TrackDetailsScreen';
 
@@ -18,7 +19,7 @@ export default function App() {
 
   return (
     // Logique de navigation de l'application :
-    //    - 4 écrans : HomeScreen, PlaylistScreen, SearchResultScreen, TrackDetailsScreen
+    //    - 5 écrans : HomeScreen, PlaylistScreen, RatingsScreen, SearchResultScreen, TrackDetailsScreen
     //    - Ecran de démarrage : HomeScreen
 
     <Provider store={store}>
@@ -38,6 +39,14 @@ export default function App() {
                     style={styles.icon} 
                     onPress={() => navigation.navigate('Playlist')}
                   />
+                ),
+                headerLeft: () => (
+                  <Icon 
+                    name="star" 
+                    size={25}
+                    style={styles.icon} 
+                    onPress={() => navigation.navigate('Ratings')}
+                  />
                 )
               };
             }}></Stack.Screen>
@@ -46,6 +55,11 @@ export default function App() {
             name="Playlist" 
             component={PlaylistScreen}
             options={{ headerTitle: props => <Text style={styles.title}>Ma playlist</Text> }}></Stack.Screen>
+
+          <Stack.Screen 
+            name="Ratings" 
+            component={RatingsScreen}
+            options={{ headerTitle: props => <Text style={styles.title}>Mes notations</Text> }}></Stack.Screen>
 
           <Stack.Screen 
             name="SearchResult" 

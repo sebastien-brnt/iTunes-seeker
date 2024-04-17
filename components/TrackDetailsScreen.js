@@ -4,6 +4,8 @@ import { trackExists } from "./TracksSlice";
 import AddRating from "./AddRating";
 import AddTrack from "./AddTrack";
 import RemoveTrack from "./RemoveTrack";
+import { ratingExists } from "./RatingsSlice";
+import RatingDisplay from "./RatingDisplay";
 
 export default function TrackDetailsScreen({ route }) {
     // Récupération des informations du morceau
@@ -11,6 +13,10 @@ export default function TrackDetailsScreen({ route }) {
 
     // Vériication de l'existence du morceau dans la playlist
     const isTrackPresent = useSelector(state => trackExists(state, track.trackId));
+
+    // Vériication de l'existence du morceau dans la liste des morceaux noté
+    const isRatingPresent = useSelector(state => ratingExists(state, track.trackId));
+    const rating = 5;
 
     // Fonction pour formater le temps en minutes et secondes
     function formatTime(milliseconds) {
@@ -55,7 +61,14 @@ export default function TrackDetailsScreen({ route }) {
 
                     {/* Notation du morceau */}
                     <Text style={styles.title}>Notation</Text>
-                    <AddRating trackId={track.trackId} />
+                    {isRatingPresent ? 
+                        <View>
+                            <Text style={styles.detail}>Vous avez noté ce morceau, voici votre note :</Text>
+                            <RatingDisplay rating={rating}/>
+                        </View>
+                    : 
+                        <AddRating track={track} />
+                    }
                 </View>
             ) : (
                 <Text style={styles.title}>Aucune information sur le morceau disponible.</Text>

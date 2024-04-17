@@ -50,7 +50,7 @@ export default function HomeScreen({navigation}) {
                         <ActivityIndicator size="large" />
                     </View>
                 ) : (
-                    <Text></Text>
+                    null
                 )}
 
 
