@@ -11,21 +11,22 @@ export default function HomeScreen({navigation}) {
     useEffect(() => {
         // Fonction pour effectuer une recherche avec l'API iTunes
         const searchWithAPI = async (term) => {
-          try {
-            const response = await fetch(
-              `https://itunes.apple.com/search?term=${encodeURIComponent(term)}`
-            );
-            const data = await response.json();
-            setResults(data.results);
-            setLoading(false);
-          } catch (error) {
-            console.error("Erreur lors de la recherche :", error);
-            setLoading(false);
-          }
-        };
-    
-        // Lancement de la recherche
-        searchWithAPI(search);
+            setLoading(true)
+            try {
+                const response = await fetch(
+                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}`
+                );
+                const data = await response.json();
+                setResults(data.results);
+                setLoading(false);
+            } catch (error) {
+                console.error("Erreur lors de la recherche :", error);
+                setLoading(false);
+            }
+            };
+        
+            // Lancement de la recherche
+            searchWithAPI(search);
       }, [search]);
 
     return (
@@ -45,7 +46,7 @@ export default function HomeScreen({navigation}) {
 
                 {/* Affichage d'un message de chargement */}
                 {loading ? (
-                    <View style={styles.container}>
+                    <View style={styles.loading}>
                         <Text style={styles.searchText}>Recherche en cours...</Text>
                         <ActivityIndicator size="large" />
                     </View>
@@ -55,7 +56,7 @@ export default function HomeScreen({navigation}) {
 
 
                 {/* Affichage du résultat de la recherche lorsque le chargement est terminé */}
-                {search.length >= 1 && (results.length > 0 ? (
+                {search.length >= 1 && !loading && (results.length > 0 ? (
                     <FlatList
                     data={results}
                     keyExtractor={(item) => item.trackId ? item.trackId.toString() : item.collectionId.toString()}
@@ -66,7 +67,7 @@ export default function HomeScreen({navigation}) {
                     />
                 ) : (
                     // Message si aucun résultat n'est trouvé
-                    <Text>Aucun résultat trouvé.</Text>
+                    <Text style={styles.noResult}>Aucun résultat trouvé.</Text>
                 ))}
         </View>
     )
@@ -96,5 +97,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         borderColor: '#e1e1e1'
+    },
+    loading: {
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    searchText: {
+        marginBottom: 15,
+    },
+    noResult: {
+        marginTop: 20,
+        textAlign: 'center'
     }
 });
