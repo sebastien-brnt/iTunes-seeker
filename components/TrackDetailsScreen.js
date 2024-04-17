@@ -6,6 +6,7 @@ import AddTrack from "./AddTrack";
 import RemoveTrack from "./RemoveTrack";
 import { ratingSelectorById } from "./RatingsSlice";
 import RatingDisplay from "./RatingDisplay";
+import RemoveRating from "./RemoveRating";
 
 export default function TrackDetailsScreen({ route }) {
     // Récupération des informations du morceau
@@ -66,6 +67,7 @@ export default function TrackDetailsScreen({ route }) {
                         <View>
                             <Text style={styles.detail}>Vous avez noté ce morceau, voici votre note :</Text>
                             <RatingDisplay rating={trackRating.rating}/>
+                            <RemoveRating track={track} />
                         </View>
                     : 
                         <AddRating track={track} />

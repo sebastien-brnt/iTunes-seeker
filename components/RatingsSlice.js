@@ -12,7 +12,7 @@ const ratingsSlice = createSlice({
 
         // Reducer pour enlever une notation
         removeRating: (state, action) => {
-            const index = state.findIndex(rating => rating.trackId === action.payload);
+            const index = state.findIndex(rating => rating.track.trackId === action.payload);
             if (index !== -1) {
                 state.splice(index, 1);
             }
