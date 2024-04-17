@@ -27,19 +27,19 @@ export const ratingsSelector = (state) => state.ratings;
 
 // Sélecteur pour obtenir une seule notation en fonction de l'id du track
 export const ratingSelectorById = (state, trackId) => {
-  // Vérifie si les ratings et trackId sont bien structurés et existent
-  if (state.ratings && trackId) {
-    // Parcours les ratings pour trouver celui qui correspond au trackId donné
-    for (const rating of Object.values(state.ratings)) {
-      if (rating.track && rating.track.trackId === trackId) {
-        return rating;
-      }
+    // Vérifie si il y a des morceaux noté et si un trackId est donné
+    if (state.ratings && trackId) {
+        // Parcours les ratings pour trouver celui qui correspond au trackId donné
+        for (const rating of Object.values(state.ratings)) {
+            if (rating.track && rating.track.trackId === trackId) {
+                return rating;
+            }
+        }
     }
-  }
-  // Retourne undefined si aucun rating correspondant n'a été trouvé
-  return undefined;
+    
+    // Retourne undefined si aucun rating correspondant n'a été trouvé
+    return undefined;
 };
-
 
 // Sélecteur pour vérifier si un track a déjà été noté
 export const ratingExists = createSelector(

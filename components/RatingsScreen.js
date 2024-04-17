@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ratingsSelector } from "./RatingsSlice";
 import TrackItem from "./TrackItem";
 
-export default function RatingsScreen({route, navigation}) {
+export default function RatingsScreen() {
     // Récupération des morceaux de la playlist
     const ratings = useSelector(ratingsSelector);
 
@@ -16,7 +16,7 @@ export default function RatingsScreen({route, navigation}) {
                 keyExtractor={(item) => item.track.trackId ? item.track.trackId.toString() : item.track.collectionId.toString()}
                 renderItem={({ item }) => (
                     // Utilisation du composant TrackItem pour afficher les informations du morceau
-                    <TrackItem track={item.track} rating={item.rating} />
+                    <TrackItem track={item.track} />
                 )}/>
             ) : (
                 // Message si aucun résultat n'est trouvé

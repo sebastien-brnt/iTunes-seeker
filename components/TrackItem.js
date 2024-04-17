@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { ratingExists } from './RatingsSlice.js';
+import { ratingExists, ratingSelectorById } from './RatingsSlice.js';
 import RatingDisplay from './RatingDisplay.js';
 import { useSelector } from 'react-redux';
 
@@ -10,12 +10,10 @@ export default function TrackItem(props) {
 
     // Récupération des informations du morceau
     const track = props.track;
-    const rating = props.rating;
+    let trackRating = undefined;
 
-    // Vériication de l'existence du morceau dans la liste des morceaux noté
-    const isRatingPresent = useSelector(state => ratingExists(state, track.trackId));
-
-    console.log(isRatingPresent)
+    // Récupération de la note du morceau si il est dans la liste des morceaux noté
+    trackRating = useSelector(state => ratingSelectorById(state, track.trackId));
 
     return (
         // Affichages des informations dans l'item
@@ -25,8 +23,8 @@ export default function TrackItem(props) {
                 <View style={styles.detailsContainer}>
                     <Text style={styles.trackName}>{track.trackName}</Text>
                     <Text>{track.artistName}</Text>
-                    {rating ? 
-                        <RatingDisplay rating={rating} />
+                    {trackRating ? 
+                        <RatingDisplay rating={trackRating.rating} />
                         :
                         null
                     }
