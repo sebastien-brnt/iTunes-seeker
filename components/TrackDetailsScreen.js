@@ -66,7 +66,7 @@ export default function TrackDetailsScreen({ route }) {
                     {trackRating ? 
                         <View>
                             <Text style={styles.detail}>Vous avez noté ce morceau, voici votre note :</Text>
-                            <RatingDisplay rating={trackRating.rating}/>
+                            <RatingDisplay rating={trackRating.rating} size="20" />
                             <RemoveRating track={track} />
                         </View>
                     : 
@@ -116,5 +116,5 @@ const styles = StyleSheet.create({
     },
     detail: {
         marginBottom: 5
-    },
+    }
 });

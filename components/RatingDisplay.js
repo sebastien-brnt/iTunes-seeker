@@ -9,6 +9,9 @@ export default function RatingDisplay(props) {
     // Récupération la note
     const rating = Number(props.rating);
 
+    // Récupération la note
+    const size = props.size ? props.size : 15;
+
     // Tableau de la longueur de la note afin de faire un map dessus et afficher le bon nombre d'étoiles
     const items = new Array(rating).fill(null);
 
@@ -18,7 +21,7 @@ export default function RatingDisplay(props) {
                 // Affcihage d'icon star en fonction de la note
                 <Icon 
                 name="star" 
-                size={15}
+                size={size}
                 key={index}
                 />
             ))}
