@@ -7,21 +7,24 @@ export default function RatingsScreen() {
     // Récupération des morceaux de la playlist
     const ratings = useSelector(ratingsSelector);
 
+
+    // Affichage d'un message si aucun morceau n'a été noté
+    if (ratings.length === 0) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.textEmptyList}>Vous n'avez noté aucun morceau pour le moment.</Text>
+            </View>
+        );
+    }
+
+    // Affichage de la liste des morceaux notés
     return (
         <View style={styles.container}>
-            {/* Liste des morceau ayant reçu une note */}
-            {ratings.length >= 1 ? (
-                <FlatList
+            <FlatList
                 data={ratings}
-                keyExtractor={(item) => item.track.trackId ? item.track.trackId.toString() : item.track.collectionId.toString()}
-                renderItem={({ item }) => (
-                    // Utilisation du composant TrackItem pour afficher les informations du morceau
-                    <TrackItem track={item.track} />
-                )}/>
-            ) : (
-                // Message si aucun résultat n'est trouvé
-                <Text style={styles.emptyPlaylist}>Vous n'avez noté aucun moceau pour le moment.</Text>
-            )}
+                keyExtractor={(item) => item.track.trackId.toString()}
+                renderItem={({ item }) => ( <TrackItem track={item.track} /> )} // Utilisation du composant TrackItem pour afficher les informations du morceau
+            />
         </View>
     )
 }
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 20,
     },
-    emptyPlaylist: {
+    textEmptyList: {
         marginTop: 50,
         textAlign: 'center',
     }
