@@ -1,7 +1,7 @@
 import { Text, FlatList, View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { ratingsSelector } from "./RatingsSlice";
-import TrackItem from "./TrackItem";
+import { ratingsSelector } from "../slices/RatingsSlice";
+import TrackItem from "../common/TrackItem";
 
 export default function RatingsScreen() {
     // Récupération des morceaux de la playlist

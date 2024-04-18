@@ -8,17 +8,17 @@ import store from './store/store';
 
 
 // Import des pages
-import HomeScreen from './components/HomeScreen';
-import PlaylistScreen from './components/PlaylistScreen';
-import RatingsScreen from './components/RatingsScreen';
-import TrackDetailsScreen from './components/TrackDetailsScreen';
+import HomeScreen from './components/screens/HomeScreen';
+import PlaylistScreen from './components/screens/PlaylistScreen';
+import RatingsScreen from './components/screens/RatingsScreen';
+import TrackDetailsScreen from './components/screens/TrackDetailsScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator(); // Permet de définir la pile de navigation
 
   return (
     // Logique de navigation de l'application :
-    //    - 5 écrans : HomeScreen, PlaylistScreen, RatingsScreen, TrackDetailsScreen
+    //    - 4 écrans : HomeScreen, PlaylistScreen, RatingsScreen, TrackDetailsScreen
     //    - Ecran de démarrage : HomeScreen
 
     <Provider store={store}>

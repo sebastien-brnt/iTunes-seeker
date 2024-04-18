@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { ratingSelectorById } from './RatingsSlice.js';
-import RatingDisplay from './RatingDisplay.js';
-import { trackExists } from './TracksSlice.js';
-import RemoveTrack from './RemoveTrack.js';
-import AddTrack from './AddTrack.js';
+import { ratingSelectorById } from '../slices/RatingsSlice.js';
+import DisplayRating from '../rating/DisplayRating.js';
+import { trackExists } from '../slices/TracksSlice.js';
+import RemoveTrack from '../playlist/RemoveTrack.js';
+import AddTrack from '../playlist/AddTrack.js';
 
 
 export default function TrackItem({track}) {
@@ -28,7 +28,7 @@ export default function TrackItem({track}) {
                     <Text>{track.artistName}</Text>
                     
                     {/* On affiche la note du morceau si il est noté */}
-                    {trackRating && <RatingDisplay rating={trackRating.rating} />}
+                    {trackRating && <DisplayRating rating={trackRating.rating} />}
                 </View>
 
                 {/* On affiche le composant en fonction de si le track est présent ou non dans la track list */}

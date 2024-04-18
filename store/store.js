@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import tracksReducer from "../components/TracksSlice";
-import ratingsReducer from "../components/RatingsSlice";
+import tracksReducer from "../components/slices/TracksSlice";
+import ratingsReducer from "../components/slices/RatingsSlice";
 
 export default configureStore({
     reducer: {

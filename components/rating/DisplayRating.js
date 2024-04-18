@@ -2,7 +2,7 @@ import { View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
-export default function RatingDisplay({ rating, size = 15 }) {
+export default function DisplayRating({ rating, size = 15 }) {
     // Récupération la note et conversion en nombre entier
     const validRating = Math.max(0, Math.floor(Number(rating)));
 

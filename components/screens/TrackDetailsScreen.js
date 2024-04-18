@@ -1,12 +1,12 @@
 import { Text, View, Image, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { trackExists } from "./TracksSlice";
-import AddTrack from "./AddTrack";
-import RemoveTrack from "./RemoveTrack";
-import { ratingSelectorById } from "./RatingsSlice";
-import AddRating from "./AddRating";
-import RemoveRating from "./RemoveRating";
-import RatingDisplay from "./RatingDisplay";
+import { trackExists } from "../slices/TracksSlice";
+import AddTrack from "../playlist/AddTrack";
+import RemoveTrack from "../playlist/RemoveTrack";
+import { ratingSelectorById } from "../slices/RatingsSlice";
+import AddRating from "../rating/AddRating";
+import RemoveRating from "../rating/RemoveRating";
+import DisplayRating from "../rating/DisplayRating";
 
 export default function TrackDetailsScreen({ route }) {
     // Récupération des informations du morceau
@@ -63,7 +63,7 @@ export default function TrackDetailsScreen({ route }) {
                     {trackRating ? 
                         <View>
                             <Text style={styles.detail}>Vous avez noté ce morceau, voici votre note :</Text>
-                            <RatingDisplay rating={trackRating.rating} size={20} />
+                            <DisplayRating rating={trackRating.rating} size={20} />
                             <RemoveRating track={track} />
                         </View>
                     : 

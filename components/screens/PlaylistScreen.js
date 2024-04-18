@@ -1,7 +1,7 @@
 import { Text, FlatList, View, StyleSheet } from "react-native";
-import TrackItem from "./TrackItem";
+import TrackItem from "../common/TrackItem";
 import { useSelector } from "react-redux";
-import { trackSelector } from "./TracksSlice";
+import { trackSelector } from "../slices/TracksSlice";
 
 export default function PlaylistScreen() {
     // Récupération des morceaux de la playlist

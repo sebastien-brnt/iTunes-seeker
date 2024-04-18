@@ -1,6 +1,6 @@
 import { View, StyleSheet } from "react-native"
 import { useDispatch } from "react-redux";
-import { removeTrack } from "./TracksSlice"; 
+import { removeTrack } from "../slices/TracksSlice"; 
 import Icon from 'react-native-vector-icons/AntDesign';
 
 

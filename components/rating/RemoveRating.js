@@ -1,6 +1,6 @@
 import { View, StyleSheet, Button } from "react-native"
 import { useDispatch } from "react-redux";
-import { removeRating } from "./RatingsSlice"; 
+import { removeRating } from "../slices/RatingsSlice"; 
 
 
 export default function RemoveRating({ track }) {

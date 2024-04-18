@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, TextInput, FlatList, ActivityIndicator } from "react-native"
 import { useState, useEffect } from "react";
-import TrackItem from "./TrackItem";
+import TrackItem from "../common/TrackItem";
 
 export default function HomeScreen({navigation}) {
     // Variables spécifiques à la recherche
