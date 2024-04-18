@@ -4,7 +4,7 @@ import TrackItem from "./TrackItem";
 
 export default function HomeScreen({navigation}) {
     // Variables spécifiques à la recherche
-    const [search, setSearch] = useState('Chargé kaaris');
+    const [search, setSearch] = useState('Kaaris');
     const [loading, setLoading] = useState(true);
     const [results, setResults] = useState([]);
 

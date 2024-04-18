@@ -19,7 +19,6 @@ export default function TrackDetailsScreen({ route }) {
     // Récupération de la note du morceau si il est dans la liste des morceaux noté
     trackRating = useSelector(state => ratingSelectorById(state, track.trackId));
     
-
     // Fonction pour formater le temps en minutes et secondes
     function formatTime(milliseconds) {
         const totalSeconds = Math.floor(milliseconds / 1000);
@@ -66,7 +65,7 @@ export default function TrackDetailsScreen({ route }) {
                     {trackRating ? 
                         <View>
                             <Text style={styles.detail}>Vous avez noté ce morceau, voici votre note :</Text>
-                            <RatingDisplay rating={trackRating.rating} size="20" />
+                            <RatingDisplay rating={trackRating.rating} size={20} />
                             <RemoveRating track={track} />
                         </View>
                     : 
