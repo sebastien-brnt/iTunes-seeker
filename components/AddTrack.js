@@ -14,10 +14,17 @@ export default function AddTrack({ track }) {
         dispatch(addTrack(track))
     }
 
-
-    return (    
+    // Bouton pour ajouter un morceau à la playlist
+    return (
         <View style={styles.button}>
-            <Icon name="hearto" size={25} color="#000" onPress={addNewTrack}/>
+            <Icon
+                name="hearto"
+                size={25}
+                color="#000"
+                onPress={addNewTrack}
+                accessibilityLabel="Ajouter le morceau"
+                accessibilityHint="Ajouter ce morceau à votre playlist"
+            />
         </View>
     )
 }

@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function RemoveTrack({ track }) {
 
-    // Dispatcher pour comminiquer les actions au store
+    // Dispatcher pour communiquer les actions au store
     const dispatch = useDispatch();
 
     // On effectue l'action de retirer un morceau de la playlist
@@ -14,10 +14,17 @@ export default function RemoveTrack({ track }) {
         dispatch(removeTrack(track.trackId))
     }
 
-
-    return (    
+    // Bouton pour retirer un morceau de la playlist
+    return (
         <View style={styles.button}>
-            <Icon name="heart" size={25} color="#000" onPress={removePlaylistTrack}/>
+            <Icon
+                name="heart"
+                size={25}
+                color="#000"
+                onPress={removePlaylistTrack}
+                accessibilityLabel="Retirer le morceau"
+                accessibilityHint="Retirer ce morceau de votre playlist"
+            />
         </View>
     )
 }
