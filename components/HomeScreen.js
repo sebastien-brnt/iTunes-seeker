@@ -14,7 +14,7 @@ export default function HomeScreen({navigation}) {
             setLoading(true)
             try {
                 const response = await fetch(
-                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}`
+                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=musicTrack`
                 );
                 const data = await response.json();
                 setResults(data.results);
