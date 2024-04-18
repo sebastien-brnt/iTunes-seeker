@@ -11,7 +11,6 @@ import store from './store/store';
 import HomeScreen from './components/HomeScreen';
 import PlaylistScreen from './components/PlaylistScreen';
 import RatingsScreen from './components/RatingsScreen';
-import SearchResultScreen from './components/SearchResultScreen';
 import TrackDetailsScreen from './components/TrackDetailsScreen';
 
 export default function App() {
@@ -19,7 +18,7 @@ export default function App() {
 
   return (
     // Logique de navigation de l'application :
-    //    - 5 écrans : HomeScreen, PlaylistScreen, RatingsScreen, SearchResultScreen, TrackDetailsScreen
+    //    - 5 écrans : HomeScreen, PlaylistScreen, RatingsScreen, TrackDetailsScreen
     //    - Ecran de démarrage : HomeScreen
 
     <Provider store={store}>
@@ -61,11 +60,6 @@ export default function App() {
             component={RatingsScreen}
             options={{ headerTitle: props => <Text style={styles.title}>Mes notations</Text> }}></Stack.Screen>
 
-          <Stack.Screen 
-            name="SearchResult" 
-            component={SearchResultScreen}
-            options={{ headerTitle: props => <Text style={styles.title}>Résultat de recherche</Text> }}></Stack.Screen>
-          
           <Stack.Screen 
             name="TrackDetails" 
             component={TrackDetailsScreen}
