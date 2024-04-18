@@ -4,30 +4,40 @@ import TrackItem from "./TrackItem";
 
 export default function HomeScreen({navigation}) {
     // Variables spécifiques à la recherche
-    const [search, setSearch] = useState('Kaaris');
+    const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(true);
     const [results, setResults] = useState([]);
 
+
+    // Fonction pour effectuer une recherche avec l'API iTunes
+    const searchWithAPI = async (term) => {
+        if (!term) {
+          setLoading(false);
+          return;
+        }
+    
+        setLoading(true);
+
+        try {
+            const response = await fetch(
+            `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=musicTrack`
+            );
+            const data = await response.json();
+            setResults(data.results);
+            setLoading(false);
+        } catch (error) {
+            console.error("Erreur lors de la recherche :", error);
+            setLoading(false);
+        }
+
+        setLoading(false);
+    };
+
+    // Lancement de la recherche
     useEffect(() => {
-        // Fonction pour effectuer une recherche avec l'API iTunes
-        const searchWithAPI = async (term) => {
-            setLoading(true)
-            try {
-                const response = await fetch(
-                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=musicTrack`
-                );
-                const data = await response.json();
-                setResults(data.results);
-                setLoading(false);
-            } catch (error) {
-                console.error("Erreur lors de la recherche :", error);
-                setLoading(false);
-            }
-            };
-        
-            // Lancement de la recherche
-            searchWithAPI(search);
-      }, [search]);
+        searchWithAPI(search);
+    }, [search]);
+
 
     return (
         <View style={styles.container}>
