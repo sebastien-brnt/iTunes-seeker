@@ -6,32 +6,42 @@ import { Picker } from '@react-native-picker/picker';
 
 export default function AddRating({ track }) {
     const [rating, setRating] = useState(3);
+
+    // Dispatcher pour comminiquer les actions au store
     const dispatch = useDispatch();
 
-    const handleSubmit = () => {
+
+    // Fonction pour ajouter une note
+    const addNewRating = () => {
+        // Création de l'objet de la note
         const newRating = {
             track: track,
             rating: rating
         };
+
         dispatch(addRating(newRating));
     };
 
     return (
         <View>
             <Text>Notez ce morceau (1-5) :</Text>
+            
+            {/* Sélecteur pour choisir la note */}
             <Picker
                 selectedValue={rating}
-                onValueChange={(itemValue) => setRating(itemValue)}>
-                <Picker.Item label="1" value={1} />
-                <Picker.Item label="2" value={2} />
-                <Picker.Item label="3" value={3} />
-                <Picker.Item label="4" value={4} />
-                <Picker.Item label="5" value={5} />
+                onValueChange={(itemValue) => setRating(itemValue)}
+                style={styles.picker}
+            >
+                {/* Création des options pour la note */}
+                {Array.from({ length: 5 }, (item, i) => (
+                    <Picker.Item key={i + 1} label={`${i + 1}`} value={i + 1} />
+                ))}
             </Picker>
+
             <View style={styles.button}>
                 <Button
                     title="Valider ma note"
-                    onPress={handleSubmit}
+                    onPress={addNewRating}
                 />
             </View>
         </View>
@@ -45,4 +55,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10,
     },
+    picker: {
+        width: '100%',
+        backgroundColor: '#fff',
+    }
 });

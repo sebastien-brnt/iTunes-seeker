@@ -1,28 +1,23 @@
 import { View, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
-export default function RatingDisplay(props) {
-    const navigation = useNavigation();
-
-    // Récupération la note
-    const rating = Number(props.rating);
-
-    // Récupération la note
-    const size = props.size ? props.size : 15;
+export default function RatingDisplay({ rating, size = 15 }) {
+    // Récupération la note et conversion en nombre entier
+    const validRating = Math.max(0, Math.floor(Number(rating)));
 
     // Tableau de la longueur de la note afin de faire un map dessus et afficher le bon nombre d'étoiles
-    const items = new Array(rating).fill(null);
+    const items = new Array(validRating).fill(null);
 
+
+    // Affcihage d'icon étoile en fonction de la note
     return (
         <View style={styles.ratingRow}>
             {items.map((item, index) => (
-                // Affcihage d'icon star en fonction de la note
                 <Icon 
-                name="star" 
-                size={size}
-                key={index}
+                    name="star" 
+                    size={size}
+                    key={index}
                 />
             ))}
         </View>

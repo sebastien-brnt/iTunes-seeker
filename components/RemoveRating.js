@@ -7,7 +7,7 @@ export default function RemoveRating({ track }) {
     // Dispatcher pour comminiquer les actions au store
     const dispatch = useDispatch();
 
-    // On effectue l'action de retirer un morceau de la la liste des morceaux notés
+    // Fonction pour supprimer un morceau de la liste des morceaux notés
     const removeRatingInList = () => {
         dispatch(removeRating(track.trackId))
     }
