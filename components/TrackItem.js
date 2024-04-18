@@ -1,45 +1,38 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 import { ratingSelectorById } from './RatingsSlice.js';
 import RatingDisplay from './RatingDisplay.js';
-import { useSelector } from 'react-redux';
+import { trackExists } from './TracksSlice.js';
 import RemoveTrack from './RemoveTrack.js';
 import AddTrack from './AddTrack.js';
-import { trackExists } from './TracksSlice.js';
 
 
-export default function TrackItem(props) {
+export default function TrackItem({track}) {
+    // Utilisation de la navigation
     const navigation = useNavigation();
 
-    // Récupération des informations du morceau
-    const track = props.track;
-    let trackRating = undefined;
-
     // Récupération de la note du morceau si il est dans la liste des morceaux noté
-    trackRating = useSelector(state => ratingSelectorById(state, track.trackId));
+    const trackRating = useSelector(state => ratingSelectorById(state, track.trackId));
 
     // Vérifie si le morceau est dans la tracks list
     const isTrackPresent = useSelector(state => trackExists(state, track.trackId));
 
     return (
         // Affichages des informations dans l'item
-        <TouchableOpacity onPress={() => navigation.navigate('TrackDetails', { track: track })}>
+        <TouchableOpacity onPress={() => navigation.navigate('TrackDetails', { track })}>
             <View style={styles.container}>
                 <Image source={{ uri: track.artworkUrl100 }} style={styles.image} />
                 <View style={styles.detailsContainer}>
                     <Text style={styles.trackName}>{track.trackName}</Text>
                     <Text>{track.artistName}</Text>
-                    {trackRating ? 
-                        <RatingDisplay rating={trackRating.rating} />
-                        :
-                        null
-                    }
+                    
+                    {/* On affiche la note du morceau si il est noté */}
+                    {trackRating && <RatingDisplay rating={trackRating.rating} />}
                 </View>
-                {isTrackPresent ?
-                    <RemoveTrack track={track} />
-                    :
-                    <AddTrack track={track} />
-                }
+
+                {/* On affiche le composant en fonction de si le track est présent ou non dans la track list */}
+                {isTrackPresent ? <RemoveTrack track={track} /> : <AddTrack track={track} />}
             </View>
         </TouchableOpacity>
     );
