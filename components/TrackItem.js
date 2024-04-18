@@ -20,7 +20,7 @@ export default function TrackItem({track}) {
 
     return (
         // Affichages des informations dans l'item
-        <TouchableOpacity onPress={() => navigation.navigate('TrackDetails', { track })}>
+        <TouchableOpacity onPress={() => navigation.navigate('Details', { track })}>
             <View style={styles.container}>
                 <Image source={{ uri: track.artworkUrl100 }} style={styles.image} />
                 <View style={styles.detailsContainer}>

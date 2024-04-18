@@ -1,4 +1,4 @@
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
@@ -23,14 +23,15 @@ export default function App() {
 
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Home'>
+      <Stack.Navigator initialRouteName='Home' screenOptions={{ headerTitleStyle: styles.title }}>
+
           <Stack.Screen 
-            name="Home" 
+            name="Acceuil" 
             component={HomeScreen}
             options={() => {
               const navigation = useNavigation();
               return {
-                headerTitle: props => <Text style={styles.title}>Accueil</Text>,
+                headerTitle: "Accueil",
                 headerRight: () => (
                   <Icon 
                     name="heart" 
@@ -44,7 +45,7 @@ export default function App() {
                     name="star" 
                     size={25}
                     style={styles.icon} 
-                    onPress={() => navigation.navigate('Ratings')}
+                    onPress={() => navigation.navigate('Notations')}
                   />
                 )
               };
@@ -53,17 +54,20 @@ export default function App() {
           <Stack.Screen 
             name="Playlist" 
             component={PlaylistScreen}
-            options={{ headerTitle: props => <Text style={styles.title}>Ma playlist</Text> }}></Stack.Screen>
+            options={{ headerTitle: "Ma playlist" }}>
+          </Stack.Screen>
 
           <Stack.Screen 
-            name="Ratings" 
+            name="Notations" 
             component={RatingsScreen}
-            options={{ headerTitle: props => <Text style={styles.title}>Mes notations</Text> }}></Stack.Screen>
+            options={{ headerTitle: "Mes notations" }}>
+          </Stack.Screen>
 
           <Stack.Screen 
-            name="TrackDetails" 
+            name="Details" 
             component={TrackDetailsScreen}
-            options={{ headerTitle: props => <Text style={styles.title}>Morceau</Text> }}></Stack.Screen>
+            options={{ headerTitle: "Détails du moceau" }}>
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
