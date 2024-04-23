@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, TextInput, FlatList, ActivityIndicator } from "react-native"
 import { useState, useEffect } from "react";
 import TrackItem from "../common/TrackItem";
+import ArtistItem from "../common/ArtistItem";
 import SelectDropdown from 'react-native-select-dropdown'
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -12,8 +13,8 @@ export default function HomeScreen({navigation}) {
     const [results, setResults] = useState([]);
 
     const searchTypeList = [
-        {title: 'Artiste', icon: 'user', type: 'musicArtist'},
         {title: 'Musiques', icon: 'customerservice', type: 'musicTrack'},
+        {title: 'Artiste', icon: 'user', type: 'musicArtist'},
         {title: 'Album', icon: 'book', type: 'musicAlbum'},
       ];
     // Fonction pour effectuer une recherche avec l'API iTunes
@@ -53,7 +54,7 @@ export default function HomeScreen({navigation}) {
                 {/* Sélecteur pour choisir le type de recherche */}
                 <SelectDropdown
                     data={searchTypeList}
-                    onSelect={(selectedItem) => { setSearchType(selectedItem.type) }}
+                    onSelect={(selectedItem) => { setSearchType(selectedItem.type); setSearch('') }}
                     renderButton={(selectedItem, isOpened) => { // Rendu du bouton
                         return (
                             <View style={styles.dropdownButtonStyle}>
@@ -103,14 +104,25 @@ export default function HomeScreen({navigation}) {
 
                 {/* Affichage du résultat de la recherche lorsque le chargement est terminé */}
                 {search.length >= 1 && !loading && (results.length > 0 ? (
-                    <FlatList
-                    data={results}
-                    keyExtractor={(item) => item.trackId ? item.trackId.toString() : item.collectionId.toString()}
-                    renderItem={({ item }) => (
-                        // Utilisation du composant TrackItem pour afficher les informations du morceau
-                        <TrackItem track={item} />
-                    )}
-                    />
+                    searchType === 'musicTrack' ? (
+                        <FlatList
+                        data={results}
+                        keyExtractor={(item) => item.trackId ? item.trackId.toString() : item.collectionId.toString()}
+                        renderItem={({ item }) => (
+                            // Utilisation du composant TrackItem pour afficher les informations du morceau
+                            <TrackItem track={item} />
+                        )}
+                        />
+                    ) : (
+                        <FlatList
+                        data={results}
+                        keyExtractor={(item) => item.artistId ? item.artistId.toString() : item.amgArtistId.toString()}
+                        renderItem={({ item }) => (
+                            // Utilisation du composant TrackItem pour afficher les informations du morceau
+                            <ArtistItem artist={item} />
+                        )}
+                        />
+                    )
                 ) : (
                     // Message si aucun résultat n'est trouvé
                     <Text style={styles.noResult}>Aucun résultat trouvé.</Text>
@@ -142,7 +154,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         borderWidth: 1,
-        borderRadius: 5,
+        borderRadius: 8,
         borderColor: '#e1e1e1',
     },
     loading: {
