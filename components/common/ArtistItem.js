@@ -9,7 +9,7 @@ export default function ArtistItem({artist}) {
 
     return (
         // Affichages des informations dans l'item
-        <TouchableOpacity onPress={() => navigation.navigate('Details', { artist })}>
+        <TouchableOpacity onPress={() => navigation.navigate('Artiste', { artist })}>
             <View style={styles.container}>
                 {/* <Image source={{ uri: artist.artworkUrl100 }} style={styles.image} /> */}
                 <Icon name="user" size={35} />

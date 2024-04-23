@@ -8,7 +8,7 @@ import RemoveTrack from '../playlist/RemoveTrack.js';
 import AddTrack from '../playlist/AddTrack.js';
 
 
-export default function TrackItem({track}) {
+export default function TrackItem({ track }) {
     // Utilisation de la navigation
     const navigation = useNavigation();
 
@@ -20,7 +20,7 @@ export default function TrackItem({track}) {
 
     return (
         // Affichages des informations dans l'item
-        <TouchableOpacity onPress={() => navigation.navigate('Details', { track })}>
+        <TouchableOpacity onPress={() => navigation.navigate('Morceau', { track })}>
             <View style={styles.container}>
                 <Image source={{ uri: track.artworkUrl100 }} style={styles.image} />
                 <View style={styles.detailsContainer}>

@@ -13,7 +13,7 @@ export default function TrackDetailsScreen({ route }) {
     const { track } = route.params;
     
     // Récupération de la note du morceau si il est dans la liste des morceaux noté
-    const trackRating = useSelector(state => ratingSelectorById(state, track.trackId));;
+    const trackRating = useSelector(state => ratingSelectorById(state, track.trackId));
 
     // Vériication de l'existence du morceau dans la playlist
     const isTrackPresent = useSelector(state => trackExists(state, track.trackId));

@@ -2,7 +2,7 @@ import { FlatList } from "react-native"
 import ArtistItem from "./ArtistItem";
 import TrackItem from "./TrackItem";
 
-export default function SearchResultList(props, { navigation }) {
+export default function SearchResultList(props) {
 
     const type = props.type;
     const results = props.results;
@@ -14,7 +14,7 @@ export default function SearchResultList(props, { navigation }) {
                 keyExtractor={item => item.trackId ? item.trackId.toString() : item.collectionId.toString()}
                 renderItem={({ item }) => (
                     // Utilisation du composant TrackItem pour afficher les informations du morceau
-                    <TrackItem track={item} navigation={navigation} />
+                    <TrackItem track={item} />
                 )}
             />
         );
@@ -25,7 +25,7 @@ export default function SearchResultList(props, { navigation }) {
                 keyExtractor={item => item.artistId ? item.artistId.toString() : item.amgArtistId.toString()}
                 renderItem={({ item }) => (
                     // Utilisation du composant ArtistItem pour afficher les informations du morceau
-                    <ArtistItem artist={item} navigation={navigation} />
+                    <ArtistItem artist={item} />
                 )}
             />
         );
@@ -36,7 +36,7 @@ export default function SearchResultList(props, { navigation }) {
                 keyExtractor={item => item.artistId ? item.artistId.toString() : item.amgArtistId.toString()}
                 renderItem={({ item }) => (
                     // Utilisation du composant ArtistItem pour afficher les informations du morceau
-                    <ArtistItem artist={item} navigation={navigation} />
+                    <ArtistItem artist={item} />
                 )}
             />
         );
