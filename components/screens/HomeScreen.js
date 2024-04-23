@@ -1,14 +1,21 @@
 import { Text, View, StyleSheet, TextInput, FlatList, ActivityIndicator } from "react-native"
 import { useState, useEffect } from "react";
 import TrackItem from "../common/TrackItem";
+import SelectDropdown from 'react-native-select-dropdown'
+import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function HomeScreen({navigation}) {
     // Variables spécifiques à la recherche
     const [search, setSearch] = useState('');
+    const [searchType, setSearchType] = useState('musicTrack');
     const [loading, setLoading] = useState(true);
     const [results, setResults] = useState([]);
 
-
+    const searchTypeList = [
+        {title: 'Artiste', icon: 'user', type: 'musicArtist'},
+        {title: 'Musiques', icon: 'customerservice', type: 'musicTrack'},
+        {title: 'Album', icon: 'book', type: 'musicAlbum'},
+      ];
     // Fonction pour effectuer une recherche avec l'API iTunes
     const searchWithAPI = async (term) => {
         if (!term) {
@@ -20,7 +27,7 @@ export default function HomeScreen({navigation}) {
 
         try {
             const response = await fetch(
-            `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=musicTrack`
+            `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=${searchType}`
             );
             const data = await response.json();
             setResults(data.results);
@@ -42,6 +49,35 @@ export default function HomeScreen({navigation}) {
     return (
         <View style={styles.container}>
                 <Text style={styles.title}>Rechercher un morceau</Text>
+
+                {/* Sélecteur pour choisir le type de recherche */}
+                <SelectDropdown
+                    data={searchTypeList}
+                    onSelect={(selectedItem) => { setSearchType(selectedItem.type) }}
+                    renderButton={(selectedItem, isOpened) => { // Rendu du bouton
+                        return (
+                            <View style={styles.dropdownButtonStyle}>
+                                {selectedItem && (
+                                    <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
+                                )}
+                                <Text style={styles.dropdownButtonTxtStyle}>
+                                    {(selectedItem && selectedItem.title) || 'Type de recherche'}
+                                </Text>
+                                <Icon name={isOpened ? 'up' : 'down'} style={styles.dropdownButtonArrowStyle} />
+                            </View>
+                        );
+                    }}
+                    renderItem={(item, index, isSelected) => { // Rendu de l'élément
+                        return (
+                            <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
+                                <Icon name={item.icon} style={styles.dropdownItemIconStyle} />
+                                <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
+                            </View>
+                        );
+                    }}
+                    showsVerticalScrollIndicator={false}
+                    dropdownStyle={styles.dropdownMenuStyle}
+                />
 
                 {/* Barre de recherche */}
                 <View style={styles.rowInput}>
@@ -100,13 +136,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 20,
+        marginTop: 10,
     },
     input: {
         flex: 1,
         padding: 10,
         borderWidth: 1,
         borderRadius: 5,
-        borderColor: '#e1e1e1'
+        borderColor: '#e1e1e1',
     },
     loading: {
         alignItems: 'center',
@@ -118,5 +155,52 @@ const styles = StyleSheet.create({
     noResult: {
         marginTop: 20,
         textAlign: 'center'
-    }
+    },
+
+    // Dropdown styles
+    dropdownButtonStyle: {
+      width: '100%',
+      backgroundColor: '#E9ECEF',
+      borderRadius: 12,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+    },
+    dropdownButtonTxtStyle: {
+      flex: 1,
+      fontSize: 16,
+      fontWeight: '500',
+      color: '#151E26',
+    },
+    dropdownButtonArrowStyle: {
+      fontSize: 20,
+    },
+    dropdownButtonIconStyle: {
+      fontSize: 20,
+      marginRight: 5,
+    },
+    dropdownMenuStyle: {
+      backgroundColor: '#E9ECEF',
+      borderRadius: 8,
+    },
+    dropdownItemStyle: {
+      width: '100%',
+      flexDirection: 'row',
+      paddingHorizontal: 12,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: 8,
+    },
+    dropdownItemTxtStyle: {
+      flex: 1,
+      fontSize: 16,
+      fontWeight: '500',
+      color: '#151E26',
+    },
+    dropdownItemIconStyle: {
+      fontSize: 20,
+      marginRight: 8,
+    },
 });
