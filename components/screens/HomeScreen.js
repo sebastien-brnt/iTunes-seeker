@@ -18,13 +18,18 @@ export default function HomeScreen({navigation}) {
       ];
     // Fonction pour effectuer une recherche avec l'API iTunes
     const searchWithAPI = async (term) => {
+
+        // Réinitialisation des résultats et du chargement
+        setResults([]);
+        setLoading(true);
+
+        // Si la recherche est vide, on arrête
         if (!term) {
           setLoading(false);
           return;
         }
-    
-        setLoading(true);
 
+        // Requête à l'API iTunes
         try {
             const response = await fetch(
             `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=${searchType}`
