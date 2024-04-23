@@ -1,7 +1,6 @@
 import { Text, View, StyleSheet, TextInput, FlatList, ActivityIndicator } from "react-native"
 import { useState, useEffect } from "react";
-import TrackItem from "../common/TrackItem";
-import ArtistItem from "../common/ArtistItem";
+import SearchResultList from "../common/SearchResultList";
 import SelectDropdown from 'react-native-select-dropdown'
 import Icon from 'react-native-vector-icons/AntDesign';
 
@@ -15,7 +14,7 @@ export default function HomeScreen({navigation}) {
     const searchTypeList = [
         {title: 'Musiques', icon: 'customerservice', type: 'musicTrack'},
         {title: 'Artiste', icon: 'user', type: 'musicArtist'},
-        {title: 'Album', icon: 'book', type: 'musicAlbum'},
+        {title: 'Album', icon: 'book', type: 'album'},
       ];
     // Fonction pour effectuer une recherche avec l'API iTunes
     const searchWithAPI = async (term) => {
@@ -104,25 +103,9 @@ export default function HomeScreen({navigation}) {
 
                 {/* Affichage du résultat de la recherche lorsque le chargement est terminé */}
                 {search.length >= 1 && !loading && (results.length > 0 ? (
-                    searchType === 'musicTrack' ? (
-                        <FlatList
-                        data={results}
-                        keyExtractor={(item) => item.trackId ? item.trackId.toString() : item.collectionId.toString()}
-                        renderItem={({ item }) => (
-                            // Utilisation du composant TrackItem pour afficher les informations du morceau
-                            <TrackItem track={item} />
-                        )}
-                        />
-                    ) : (
-                        <FlatList
-                        data={results}
-                        keyExtractor={(item) => item.artistId ? item.artistId.toString() : item.amgArtistId.toString()}
-                        renderItem={({ item }) => (
-                            // Utilisation du composant TrackItem pour afficher les informations du morceau
-                            <ArtistItem artist={item} />
-                        )}
-                        />
-                    )
+                    // Affichage de la liste des résultats via le composant SearchResultList
+                    <SearchResultList type={searchType} results={results} />
+                    
                 ) : (
                     // Message si aucun résultat n'est trouvé
                     <Text style={styles.noResult}>Aucun résultat trouvé.</Text>
