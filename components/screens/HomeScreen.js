@@ -75,7 +75,7 @@ export default function HomeScreen({navigation}) {
                         break;
                 }
 
-                setResults(data.results);
+                setResults(data.results); // Mise à jour des résultats
             }
 
             setLoading(false);
