@@ -12,7 +12,7 @@ export default function AlbumItem({ album }) {
             <View style={styles.container}>
                 <Image source={{ uri: album.artworkUrl60 }} style={styles.image} />
                 <View style={styles.detailsContainer}>
-                    <Text style={styles.collectionName}>{album.collectionName}</Text>
+                    <Text style={styles.collectionName} numberOfLines={1} ellipsizeMode='tail'>{album.collectionName}</Text>
                     <Text>{album.trackCount} morceau{album.trackCount > 1 ? 'x' : ''}</Text>
                 </View>
 
@@ -43,5 +43,6 @@ const styles = StyleSheet.create({
     },
     collectionName: {
         fontWeight: 'bold',
+        paddingRight: 15,
     }
 });

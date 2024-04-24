@@ -52,7 +52,7 @@ export default function ArtistDetailsScreen({ route }) {
                                 style={styles.image} 
                             />
 
-                            <View>
+                            <View style={styles.headerItem}>
                                 <Text style={styles.collectionName}>{album.collectionName}</Text>
                                 <Text style={styles.artistName}>{album.artistName}</Text>
                             </View>
@@ -130,6 +130,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 20
+    },
+    headerItem: {
+        flex: 1,
     },
     image: {
         width: 100,

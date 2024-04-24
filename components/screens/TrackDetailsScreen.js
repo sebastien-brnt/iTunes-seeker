@@ -39,7 +39,7 @@ export default function TrackDetailsScreen({ route }) {
                         source={{ uri: track.artworkUrl100 }}
                         style={styles.image} />
 
-                        <View>
+                        <View style={styles.headerItem}>
                             <Text style={styles.trackName}>{track.trackName}</Text>
                             <Text style={styles.artistName}>{track.artistName}</Text>
 
@@ -92,6 +92,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 20
+    },
+    headerItem: {
+        flex: 1,
     },
     image: {
         width: 100,

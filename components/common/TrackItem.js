@@ -28,7 +28,7 @@ export default function TrackItem({ track }) {
                         <Text style={styles.bold} numberOfLines={1} ellipsizeMode='tail'>{track.trackName}</Text>
                         {track.trackExplicitness && track.trackExplicitness === 'explicit' && <Text style={styles.explicit}>E</Text>}
                     </View>
-                    <Text>{track.artistName}</Text>
+                    <Text numberOfLines={1} ellipsizeMode='tail'>{track.artistName}</Text>
                     
                     
                     {/* On affiche la note du morceau si il est noté */}

@@ -42,16 +42,8 @@ export default function HomeScreen({navigation}) {
         // Attribut spécifiques à chaque type de recherche
         let attribute = '&attribute=';
         switch (searchType) {
-            case 'musicTrack':
-                attribut += 'songTerm';
-                break;
-            
             case 'musicArtist':
-                attribut += 'artistTerm';
-                break;
-            
-            case 'album':
-                attribut += 'albumTerm';
+                attribute += 'artistTerm';
                 break;
         
             default:
@@ -63,10 +55,29 @@ export default function HomeScreen({navigation}) {
             const response = await fetch(
             `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=${searchType}&pays=FR${attribute}`
             );
+
             const data = await response.json();
+
             if (data.results) {
+                // Supprimer les doublons en fonctions les trackId ou collectionId ou artistId suivant la recherche effectuée
+                switch (searchType) {
+                    case 'musicTrack':
+                        data.results = data.results.filter((v, i, a) => a.findIndex(t => (t.trackId === v.trackId)) === i);
+                        break;
+                    case 'musicArtist':
+                        data.results = data.results.filter((v, i, a) => a.findIndex(t => (t.artistId === v.artistId)) === i);
+                        break;
+                    case 'album':
+                        data.results = data.results.filter((v, i, a) => a.findIndex(t => (t.collectionId === v.collectionId)) === i);
+                        break;
+                    
+                    default:
+                        break;
+                }
+
                 setResults(data.results);
             }
+
             setLoading(false);
         } catch (error) {
             console.log("Erreur lors de la recherche :", error);
