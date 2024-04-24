@@ -1,6 +1,7 @@
 import { FlatList } from "react-native"
 import ArtistItem from "./ArtistItem";
 import TrackItem from "./TrackItem";
+import AlbumItem from "./AlbumItem";
 
 export default function SearchResultList(props) {
 
@@ -36,7 +37,7 @@ export default function SearchResultList(props) {
                 keyExtractor={item => item.artistId ? item.artistId.toString() : item.amgArtistId.toString()}
                 renderItem={({ item }) => (
                     // Utilisation du composant ArtistItem pour afficher les informations du morceau
-                    <ArtistItem artist={item} />
+                    <AlbumItem album={item} />
                 )}
             />
         );

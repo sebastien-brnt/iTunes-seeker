@@ -13,13 +13,14 @@ import PlaylistScreen from './components/screens/PlaylistScreen';
 import RatingsScreen from './components/screens/RatingsScreen';
 import TrackDetailsScreen from './components/screens/TrackDetailsScreen';
 import ArtistDetailsScreen from './components/screens/ArtistDetailsScreen';
+import AlbumDetailsScreen from './components/screens/AlbumDetailsScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator(); // Permet de définir la pile de navigation
 
   return (
     // Logique de navigation de l'application :
-    //    - 5 écrans : HomeScreen, PlaylistScreen, RatingsScreen, TrackDetailsScreen, ArtistDetailsScreen
+    //    - 5 écrans : HomeScreen, PlaylistScreen, RatingsScreen, TrackDetailsScreen, ArtistDetailsScreen, AlbumDetailsScreen
     //    - Ecran de démarrage : HomeScreen
 
     <Provider store={store}>
@@ -67,13 +68,19 @@ export default function App() {
           <Stack.Screen 
             name="Morceau" 
             component={TrackDetailsScreen}
-            options={{ headerTitle: "Détails du moceau" }}>
+            options={{ headerTitle: "Morceau" }}>
           </Stack.Screen>
 
           <Stack.Screen 
             name="Artiste" 
             component={ArtistDetailsScreen}
-            options={{ headerTitle: "Détails de l'artiste" }}>
+            options={{ headerTitle: "Artiste" }}>
+          </Stack.Screen>
+
+          <Stack.Screen 
+            name="Album" 
+            component={AlbumDetailsScreen}
+            options={{ headerTitle: "Album" }}>
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

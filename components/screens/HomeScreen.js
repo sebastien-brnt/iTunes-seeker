@@ -28,17 +28,39 @@ export default function HomeScreen({navigation}) {
           setLoading(false);
           return;
         }
+        console.log(search);
+
+        // Attribut spécifiques à chaque type de recherche
+        let attribut = '&attribut=';
+        switch (searchType) {
+            case 'musicTrack':
+                attribut = 'songTerm';
+                break;
+            
+            case 'musicArtist':
+                attribut = 'artistTerm';
+                break;
+            
+            case 'album':
+                attribut = 'albumTerm';
+                break;
+        
+            default:
+                break;
+        }
 
         // Requête à l'API iTunes
         try {
             const response = await fetch(
-            `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=${searchType}`
+            `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=${searchType}&pays=FR${attribut}`
             );
             const data = await response.json();
-            setResults(data.results);
+            if (data.results) {
+                setResults(data.results);
+            }
             setLoading(false);
         } catch (error) {
-            console.error("Erreur lors de la recherche :", error);
+            console.log("Erreur lors de la recherche :", error);
             setLoading(false);
         }
 

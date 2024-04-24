@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet, FlatList, ScrollView, SafeAreaView, Button } from "react-native";
 import { useEffect, useState } from "react";
 import TrackItem from "../common/TrackItem";
+import AlbumItem from "../common/AlbumItem";
 import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function ArtistDetailsScreen({ route }) {
@@ -18,10 +19,8 @@ export default function ArtistDetailsScreen({ route }) {
             const response = await fetch(`https://itunes.apple.com/lookup?id=${artist.artistId}&entity=${type}&limit=${limit}`);
             const data = await response.json();
             
-            // Si le type est song on retire le premier élément qui est l'artiste
-            if (type === 'song') {
-                data.results.shift();
-            }
+            // On retire le premier élément qui est l'artiste
+            data.results.shift();
             
             return data.results;
         } catch (error) {
@@ -32,14 +31,14 @@ export default function ArtistDetailsScreen({ route }) {
 
     // Récupération des albums et des morceaux de l'artiste
     useEffect(() => {
-        getData('album').then(setAlbums);
+        getData('album', 5).then(setAlbums);
         getData('song').then(setTracks);
     }, []);
 
 
     // Fonction pour afficher plus de morceaux et d'albums
     const viewMore = (type) => () => {
-        const limit = type === 'track' ? (viewMoreTrack ? 'allTracks' : 10) : (viewMoreAlbum ? 'allAlbums' : 10);
+        const limit = type === 'track' ? (viewMoreTrack ? 'allTracks' : 10) : (viewMoreAlbum ? 'allAlbums' : 5);
         if (type === 'track') {
             getData('song', limit).then(setTracks); // Récupération de tous les morceaux
             setViewMoreTrack(!viewMoreTrack);
@@ -55,7 +54,7 @@ export default function ArtistDetailsScreen({ route }) {
 
     return (
         <SafeAreaView style={styles.safeAreaView}>
-            <ScrollView>
+            <ScrollView style={styles.ScrollView}>
                 <View style={styles.container}>
                     <View>
                         {/* Header de l'artiste */}
@@ -75,16 +74,11 @@ export default function ArtistDetailsScreen({ route }) {
                             scrollEnabled={false}
                             keyExtractor={(item) => item.collectionId}
                             renderItem={({ item }) => (
-                                <View>
-                                    <Text>{item.collectionName}</Text>
-                                </View>
+                                <AlbumItem album={item} />
                             )}
                         />
-                        { viewMoreAlbum ?
-                            <Button title="Voir plus" onPress={viewMore('album')} />
-                            : 
-                            <Button title="Voir moins" onPress={viewMore('album')} />
-                        }
+                        {/* Affichage du bouton pour voir plus ou moins d'albums */}
+                        <Button title={viewMoreAlbum ? 'Voir plus' : 'Voir moins'} style={styles.button} onPress={viewMore('album')} />
 
                         {/* Morceaux de l'artiste */}
                         <Text style={styles.title}>Morceaux de l'artiste</Text>
@@ -96,11 +90,8 @@ export default function ArtistDetailsScreen({ route }) {
                                 <TrackItem track={item} />
                             )}
                         />
-                        { viewMoreTrack ?
-                            <Button title="Voir plus" onPress={viewMore('track')} />
-                            : 
-                            <Button title="Voir moins" onPress={viewMore('track')} /> 
-                        }
+                        {/* Affichage du bouton pour voir plus ou moins de sons */}
+                        <Button title={viewMoreTrack ? 'Voir plus' : 'Voir moins'} style={styles.button} onPress={viewMore('track')} />
                     </View>
                 </View>
             </ScrollView>
@@ -116,11 +107,15 @@ const styles = StyleSheet.create({
     },
     safeAreaView: {
         backgroundColor: '#fff',
+        flex: 1
+    },
+    ScrollView: {
+        flex: 1
     },
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginTop: 20,
+        marginTop: 30,
         marginBottom: 20,
         textAlign: 'left',
         maxWidth: '100%'
@@ -142,5 +137,8 @@ const styles = StyleSheet.create({
     noResult: {
         marginTop: 20,
         textAlign: 'center'
+    },
+    button: {
+        marginTop: 20,
     }
 });
