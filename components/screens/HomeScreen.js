@@ -28,10 +28,9 @@ export default function HomeScreen({navigation}) {
           setLoading(false);
           return;
         }
-        console.log(search);
 
         // Attribut spécifiques à chaque type de recherche
-        let attribut = '&attribut=';
+        let attribute = '&attribute=';
         switch (searchType) {
             case 'musicTrack':
                 attribut = 'songTerm';
@@ -52,7 +51,7 @@ export default function HomeScreen({navigation}) {
         // Requête à l'API iTunes
         try {
             const response = await fetch(
-            `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=${searchType}&pays=FR${attribut}`
+            `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&entity=${searchType}&pays=FR${attribute}`
             );
             const data = await response.json();
             if (data.results) {

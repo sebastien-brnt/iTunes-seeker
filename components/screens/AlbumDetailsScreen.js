@@ -79,7 +79,7 @@ export default function ArtistDetailsScreen({ route }) {
                         }
 
                         {/* Résultats */}
-                        {!loading && tracks.length !== 0 ?
+                        {!loading && ( tracks && tracks.length !== 0 ?
                             <View>
                                 <FlatList
                                     data={tracks}
@@ -92,7 +92,7 @@ export default function ArtistDetailsScreen({ route }) {
                             </View>
                             :
                             <Text style={styles.noResult}>Aucun morceau trouvé pour cet album.</Text>
-                        }
+                        )}
 
                     </View>
                 </View>
