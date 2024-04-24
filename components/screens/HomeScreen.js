@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, TextInput, FlatList, ActivityIndicator } from "react-native"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import SearchResultList from "../common/SearchResultList";
 import SelectDropdown from 'react-native-select-dropdown'
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -10,6 +10,7 @@ export default function HomeScreen({navigation}) {
     const [searchType, setSearchType] = useState('musicTrack');
     const [loading, setLoading] = useState(true);
     const [results, setResults] = useState([]);
+    const abortControllerRef = useRef(null);
 
     const searchTypeList = [
         {title: 'Musiques', icon: 'customerservice', type: 'musicTrack'},
@@ -18,6 +19,15 @@ export default function HomeScreen({navigation}) {
       ];
     // Fonction pour effectuer une recherche avec l'API iTunes
     const searchWithAPI = async (term) => {
+
+          // Annuler la requête précédente si elle est toujours en cours
+          if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+        }
+
+        // Nouveau AbortController pour la nouvelle requête
+        abortControllerRef.current = new AbortController();
+        const { signal } = abortControllerRef.current;
 
         // Réinitialisation des résultats et du chargement
         setResults([]);
@@ -33,15 +43,15 @@ export default function HomeScreen({navigation}) {
         let attribute = '&attribute=';
         switch (searchType) {
             case 'musicTrack':
-                attribut = 'songTerm';
+                attribut += 'songTerm';
                 break;
             
             case 'musicArtist':
-                attribut = 'artistTerm';
+                attribut += 'artistTerm';
                 break;
             
             case 'album':
-                attribut = 'albumTerm';
+                attribut += 'albumTerm';
                 break;
         
             default:
@@ -69,6 +79,13 @@ export default function HomeScreen({navigation}) {
     // Lancement de la recherche
     useEffect(() => {
         searchWithAPI(search);
+
+        return () => {
+            // Annuler la requête si le composant est démonté
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort();
+            }
+        };
     }, [search]);
 
 

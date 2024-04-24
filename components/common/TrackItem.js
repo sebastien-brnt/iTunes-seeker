@@ -24,8 +24,12 @@ export default function TrackItem({ track }) {
             <View style={styles.container}>
                 <Image source={{ uri: track.artworkUrl100 }} style={styles.image} />
                 <View style={styles.detailsContainer}>
-                    <Text style={styles.trackName}>{track.trackName}</Text>
+                    <View style={styles.trackName}>
+                        <Text style={styles.bold} numberOfLines={1} ellipsizeMode='tail'>{track.trackName}</Text>
+                        {track.trackExplicitness && track.trackExplicitness === 'explicit' && <Text style={styles.explicit}>E</Text>}
+                    </View>
                     <Text>{track.artistName}</Text>
+                    
                     
                     {/* On affiche la note du morceau si il est noté */}
                     {trackRating && <DisplayRating rating={trackRating.rating} />}
@@ -59,6 +63,21 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     trackName: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingRight: 15,
+    },
+    bold: {
         fontWeight: 'bold',
+    },
+    explicit: {
+        backgroundColor: '#A9A9A9',
+        fontSize: 11,
+        color: 'white',
+        paddingHorizontal: 3,
+        borderRadius: 5,
+        marginLeft: 5,
+        width: 13,
+        textAlign: 'center',
     }
 });
