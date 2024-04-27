@@ -16,7 +16,9 @@ export default function HomeScreen({navigation}) {
         {title: 'Musiques', icon: 'customerservice', type: 'musicTrack'},
         {title: 'Artiste', icon: 'user', type: 'musicArtist'},
         {title: 'Album', icon: 'book', type: 'album'},
-      ];
+    ];
+   
+   
     // Fonction pour effectuer une recherche avec l'API iTunes
     const searchWithAPI = async (term) => {
 
@@ -59,22 +61,6 @@ export default function HomeScreen({navigation}) {
             const data = await response.json();
 
             if (data.results) {
-                // Supprimer les doublons en fonctions les trackId ou collectionId ou artistId suivant la recherche effectuée
-                switch (searchType) {
-                    case 'musicTrack':
-                        data.results = data.results.filter((v, i, a) => a.findIndex(t => (t.trackId === v.trackId)) === i);
-                        break;
-                    case 'musicArtist':
-                        data.results = data.results.filter((v, i, a) => a.findIndex(t => (t.artistId === v.artistId)) === i);
-                        break;
-                    case 'album':
-                        data.results = data.results.filter((v, i, a) => a.findIndex(t => (t.collectionId === v.collectionId)) === i);
-                        break;
-                    
-                    default:
-                        break;
-                }
-
                 setResults(data.results); // Mise à jour des résultats
             }
 

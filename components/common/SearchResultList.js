@@ -12,7 +12,7 @@ export default function SearchResultList(props) {
         return (
             <FlatList
                 data={results}
-                keyExtractor={item => item.trackId ? item.trackId.toString() : item.collectionId.toString()}
+                keyExtractor={(item, index) => item.trackId ? item.trackId.toString() : index.toString()}
                 renderItem={({ item }) => (
                     // Utilisation du composant TrackItem pour afficher les informations du morceau
                     <TrackItem track={item} />
@@ -23,7 +23,7 @@ export default function SearchResultList(props) {
         return (
             <FlatList
                 data={results}
-                keyExtractor={item => item.artistId ? item.artistId.toString() : item.amgArtistId.toString()}
+                keyExtractor={(item, index) => item.artistId ? item.artistId.toString() : index.toString()}
                 renderItem={({ item }) => (
                     // Utilisation du composant ArtistItem pour afficher les informations du morceau
                     <ArtistItem artist={item} />
@@ -34,7 +34,7 @@ export default function SearchResultList(props) {
         return (
             <FlatList
                 data={results}
-                keyExtractor={item => item.artistId ? item.artistId.toString() : item.amgArtistId.toString()}
+                keyExtractor={(item, index) => item.collectionId ? item.collectionId.toString() : index.toString()}
                 renderItem={({ item }) => (
                     // Utilisation du composant ArtistItem pour afficher les informations du morceau
                     <AlbumItem album={item} />
