@@ -93,7 +93,10 @@ export default function HomeScreen({navigation}) {
                 {/* Sélecteur pour choisir le type de recherche */}
                 <SelectDropdown
                     data={searchTypeList}
-                    onSelect={(selectedItem) => { setSearchType(selectedItem.type); setSearch('') }}
+                    onSelect={(selectedItem) => { 
+                        setSearchType(selectedItem.type); 
+                        setSearch('') 
+                    }}
                     renderButton={(selectedItem, isOpened) => { // Rendu du bouton
                         return (
                             <View style={styles.dropdownButtonStyle}>
@@ -109,7 +112,7 @@ export default function HomeScreen({navigation}) {
                     }}
                     renderItem={(item, index, isSelected) => { // Rendu de l'élément
                         return (
-                            <View style={{...styles.dropdownItemStyle, ...(isSelected && {backgroundColor: '#D2D9DF'})}}>
+                            <View style={[styles.dropdownItemStyle, isSelected && {backgroundColor: '#D2D9DF'}]}>
                                 <Icon name={item.icon} style={styles.dropdownItemIconStyle} />
                                 <Text style={styles.dropdownItemTxtStyle}>{item.title}</Text>
                             </View>
