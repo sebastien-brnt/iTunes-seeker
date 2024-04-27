@@ -16,7 +16,7 @@ export default function TrackItem({ track }) {
     const trackRating = useSelector(state => ratingSelectorById(state, track.trackId));
 
     // Vérifie si le morceau est dans la tracks list
-    const isTrackPresent = useSelector(state => trackExists(state, track.trackId));
+    const isTrackPresent = useSelector((state) => trackExists(state, track.trackId));
 
     return (
         // Affichages des informations dans l'item
