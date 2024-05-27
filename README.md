@@ -4,11 +4,19 @@
 Ce projet est application mobile conçue pour rechercher des musiques en fonction de l'artiste ou du titre du morceau. Les utilisateurs peuvent également créer des playlists personnalisées et noter les musique. L'application offre la possibilité de consulter une liste des morceaux notés. Pour effectuer les recherches de musique, l'application s'appuie sur l'API iTunes Search fournis par Apple.
 
 ## Fonctionnalités
-- Recherche de musique par artiste ou titre
+- Recherche de musiques
+- Recherche d'un artiste
+- Recherche d'un album
 - Consultation des détails d'un morceau
+- Consultation des détails d'un album
+- Consultation des détails d'un artiste
 - Création de playlists personnalisées
-- Notation des morceaux
-- Consultation des morceaux notés
+- visualisation de la playlist personnalisée
+- Système de notation des morceaux
+- Consultation de la liste morceaux notés
+
+## Captures d'écran
+Un dossier nommé `screenshots` est disponible à la racine du projet. Il contient des captures d'écran de l'application.
 
 ## Technologies utilisées
 - React Native
