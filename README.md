@@ -1,7 +1,7 @@
 # Projet iTunes Seeker
 
 ## Description
-Ce projet est application mobile conçue pour rechercher des musiques en fonction de l'artiste ou du titre du morceau. Les utilisateurs peuvent également créer des playlists personnalisées et noter les musique. L'application offre la possibilité de consulter une liste des morceaux notés. Pour effectuer les recherches de musique, l'application s'appuie sur l'API iTunes Search fournis par Apple.
+Ce projet est application mobile conçue pour rechercher et visualisé les informations des musiques, des artistes et des albums. Les utilisateurs peuvent également créer des playlists personnalisées et noter les musiques. L'application offre la possibilité de consulter une liste des morceaux notés. Pour effectuer les recherches de musique, l'application s'appuie sur l'API iTunes Search fournis par Apple.
 
 ## Fonctionnalités
 - Recherche de musiques
